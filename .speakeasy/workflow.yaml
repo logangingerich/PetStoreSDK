@@ -9,3 +9,6 @@ targets:
     pet-store-9424:
         target: typescript
         source: PetStore-9.4.24-OAS
+        publish:
+            npm:
+                token: $npm_token
