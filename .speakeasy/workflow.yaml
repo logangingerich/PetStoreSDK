@@ -1,0 +1,11 @@
+workflowVersion: 1.0.0
+sources:
+    PetStore-9.4.24-OAS:
+        inputs:
+            - location: https://petstore3.swagger.io/api/v3/openapi.json
+        registry:
+            location: registry.speakeasyapi.dev/loganinc/loganinc/pet-store-9-4-24-oas
+targets:
+    pet-store-9424:
+        target: typescript
+        source: PetStore-9.4.24-OAS

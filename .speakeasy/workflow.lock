@@ -1,0 +1,27 @@
+speakeasyVersion: 1.390.3
+sources:
+    PetStore-9.4.24-OAS:
+        sourceNamespace: pet-store-9-4-24-oas
+        sourceRevisionDigest: sha256:a4c4c95ae4c8b8ee534bca3cfdbcb85babdc2085c3ebf5d0cd77cea26b41521f
+        sourceBlobDigest: sha256:9464b6777e7db923645e8ba8ea709bb0a62bf66e59f7c4d1c9941993824af6c4
+        tags:
+            - latest
+targets:
+    pet-store-9424:
+        source: PetStore-9.4.24-OAS
+        sourceNamespace: pet-store-9-4-24-oas
+        sourceRevisionDigest: sha256:a4c4c95ae4c8b8ee534bca3cfdbcb85babdc2085c3ebf5d0cd77cea26b41521f
+        sourceBlobDigest: sha256:9464b6777e7db923645e8ba8ea709bb0a62bf66e59f7c4d1c9941993824af6c4
+        outLocation: /Users/logangingerich/pet-store-9424-typescript
+workflow:
+    workflowVersion: 1.0.0
+    sources:
+        PetStore-9.4.24-OAS:
+            inputs:
+                - location: https://petstore3.swagger.io/api/v3/openapi.json
+            registry:
+                location: registry.speakeasyapi.dev/loganinc/loganinc/pet-store-9-4-24-oas
+    targets:
+        pet-store-9424:
+            target: typescript
+            source: PetStore-9.4.24-OAS
