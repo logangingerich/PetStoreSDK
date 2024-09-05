@@ -12,3 +12,7 @@ targets:
         publish:
             npm:
                 token: $npm_token
+        codeSamples:
+            output: codeSamples.yaml
+            registry:
+                location: registry.speakeasyapi.dev/loganinc/loganinc/code-samples-typescript-pet-store-9424
