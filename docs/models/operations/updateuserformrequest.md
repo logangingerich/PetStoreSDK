@@ -6,17 +6,17 @@
 import { UpdateUserFormRequest } from "pet-store-9424/models/operations";
 
 let value: UpdateUserFormRequest = {
-    username: "Ashlee36",
-    user: {
-        id: 10,
-        username: "theUser",
-        firstName: "John",
-        lastName: "James",
-        email: "john@email.com",
-        password: "12345",
-        phone: "12345",
-        userStatus: 1,
-    },
+  username: "Ashlee36",
+  user: {
+    id: 10,
+    username: "theUser",
+    firstName: "John",
+    lastName: "James",
+    email: "john@email.com",
+    password: "12345",
+    phone: "12345",
+    userStatus: 1,
+  },
 };
 ```
 

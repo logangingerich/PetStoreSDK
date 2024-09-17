@@ -360,7 +360,7 @@ const petStore9424 = new PetStore9424Core({
 
 async function run() {
   const res = await storeGetOrderById(petStore9424, {
-    orderId: 248986,
+    orderId: 614993,
   });
 
   if (!res.ok) {
@@ -434,7 +434,7 @@ const petStore9424 = new PetStore9424Core({
 
 async function run() {
   const res = await storeDeleteOrder(petStore9424, {
-    orderId: 327709,
+    orderId: 127902,
   });
 
   if (!res.ok) {

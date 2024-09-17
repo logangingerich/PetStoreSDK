@@ -11,11 +11,11 @@ import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import * as components from "../models/components/index.js";
 import {
-    ConnectionError,
-    InvalidRequestError,
-    RequestAbortedError,
-    RequestTimeoutError,
-    UnexpectedClientError,
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKError } from "../models/errors/sdkerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
@@ -23,8 +23,8 @@ import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
 export enum AddPetFormAcceptEnum {
-    applicationJson = "application/json",
-    applicationXml = "application/xml",
+  applicationJson = "application/json",
+  applicationXml = "application/xml",
 }
 
 /**
@@ -34,99 +34,100 @@ export enum AddPetFormAcceptEnum {
  * Add a new pet to the store
  */
 export async function petAddPetForm(
-    client$: PetStore9424Core,
-    request: components.Pet2,
-    options?: RequestOptions & { acceptHeaderOverride?: AddPetFormAcceptEnum }
+  client$: PetStore9424Core,
+  request: components.Pet2,
+  options?: RequestOptions & { acceptHeaderOverride?: AddPetFormAcceptEnum },
 ): Promise<
-    Result<
-        operations.AddPetFormResponse,
-        | SDKError
-        | SDKValidationError
-        | UnexpectedClientError
-        | InvalidRequestError
-        | RequestAbortedError
-        | RequestTimeoutError
-        | ConnectionError
-    >
+  Result<
+    operations.AddPetFormResponse,
+    | SDKError
+    | SDKValidationError
+    | UnexpectedClientError
+    | InvalidRequestError
+    | RequestAbortedError
+    | RequestTimeoutError
+    | ConnectionError
+  >
 > {
-    const input$ = request;
+  const input$ = request;
 
-    const parsed$ = schemas$.safeParse(
-        input$,
-        (value$) => components.Pet2$outboundSchema.parse(value$),
-        "Input validation failed"
-    );
-    if (!parsed$.ok) {
-        return parsed$;
-    }
-    const payload$ = parsed$.value;
-    const body$ = Object.entries(payload$ || {})
-        .map(([k, v]) => {
-            return encodeBodyForm$(k, v, { charEncoding: "percent" });
-        })
-        .join("&");
+  const parsed$ = schemas$.safeParse(
+    input$,
+    (value$) => components.Pet2$outboundSchema.parse(value$),
+    "Input validation failed",
+  );
+  if (!parsed$.ok) {
+    return parsed$;
+  }
+  const payload$ = parsed$.value;
 
-    const path$ = pathToFunc("/pet")();
+  const body$ = Object.entries(payload$ || {}).map(([k, v]) => {
+    return encodeBodyForm$(k, v, { charEncoding: "percent" });
+  }).join("&");
 
-    const headers$ = new Headers({
-        "Content-Type": "application/x-www-form-urlencoded",
-        Accept: options?.acceptHeaderOverride || "application/json;q=1, application/xml;q=0",
-    });
+  const path$ = pathToFunc("/pet")();
 
-    const petstoreAuth$ = await extractSecurity(client$.options$.petstoreAuth);
-    const security$ = petstoreAuth$ == null ? {} : { petstoreAuth: petstoreAuth$ };
-    const context = {
-        operationID: "addPet_form",
-        oAuth2Scopes: [],
-        securitySource: client$.options$.petstoreAuth,
-    };
-    const securitySettings$ = resolveGlobalSecurity(security$);
+  const headers$ = new Headers({
+    "Content-Type": "application/x-www-form-urlencoded",
+    Accept: options?.acceptHeaderOverride
+      || "application/json;q=1, application/xml;q=0",
+  });
 
-    const requestRes = client$.createRequest$(
-        context,
-        {
-            security: securitySettings$,
-            method: "POST",
-            path: path$,
-            headers: headers$,
-            body: body$,
-            timeoutMs: options?.timeoutMs || client$.options$.timeoutMs || -1,
-        },
-        options
-    );
-    if (!requestRes.ok) {
-        return requestRes;
-    }
-    const request$ = requestRes.value;
+  const petstoreAuth$ = await extractSecurity(client$.options$.petstoreAuth);
+  const security$ = petstoreAuth$ == null
+    ? {}
+    : { petstoreAuth: petstoreAuth$ };
+  const context = {
+    operationID: "addPet_form",
+    oAuth2Scopes: [],
+    securitySource: client$.options$.petstoreAuth,
+  };
+  const securitySettings$ = resolveGlobalSecurity(security$);
 
-    const doResult = await client$.do$(request$, {
-        context,
-        errorCodes: ["405", "4XX", "5XX"],
-        retryConfig: options?.retries || client$.options$.retryConfig,
-        retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
-    });
-    if (!doResult.ok) {
-        return doResult;
-    }
-    const response = doResult.value;
+  const requestRes = client$.createRequest$(context, {
+    security: securitySettings$,
+    method: "POST",
+    path: path$,
+    headers: headers$,
+    body: body$,
+    timeoutMs: options?.timeoutMs || client$.options$.timeoutMs || -1,
+  }, options);
+  if (!requestRes.ok) {
+    return requestRes;
+  }
+  const request$ = requestRes.value;
 
-    const [result$] = await m$.match<
-        operations.AddPetFormResponse,
-        | SDKError
-        | SDKValidationError
-        | UnexpectedClientError
-        | InvalidRequestError
-        | RequestAbortedError
-        | RequestTimeoutError
-        | ConnectionError
-    >(
-        m$.bytes(200, operations.AddPetFormResponse$inboundSchema, { ctype: "application/xml" }),
-        m$.json(200, operations.AddPetFormResponse$inboundSchema),
-        m$.fail([405, "4XX", "5XX"])
-    )(response);
-    if (!result$.ok) {
-        return result$;
-    }
+  const doResult = await client$.do$(request$, {
+    context,
+    errorCodes: ["405", "4XX", "5XX"],
+    retryConfig: options?.retries
+      || client$.options$.retryConfig,
+    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+  });
+  if (!doResult.ok) {
+    return doResult;
+  }
+  const response = doResult.value;
 
+  const [result$] = await m$.match<
+    operations.AddPetFormResponse,
+    | SDKError
+    | SDKValidationError
+    | UnexpectedClientError
+    | InvalidRequestError
+    | RequestAbortedError
+    | RequestTimeoutError
+    | ConnectionError
+  >(
+    m$.bytes(200, operations.AddPetFormResponse$inboundSchema, {
+      ctype: "application/xml",
+    }),
+    m$.json(200, operations.AddPetFormResponse$inboundSchema),
+    m$.fail([405, "4XX", "5XX"]),
+  )(response);
+  if (!result$.ok) {
     return result$;
+  }
+
+  return result$;
 }

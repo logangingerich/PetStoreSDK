@@ -1,20 +1,23 @@
-speakeasyVersion: 1.390.3
+speakeasyVersion: 1.398.0
 sources:
     PetStore-9.4.24-OAS:
         sourceNamespace: pet-store-9-4-24-oas
-        sourceRevisionDigest: sha256:a4c4c95ae4c8b8ee534bca3cfdbcb85babdc2085c3ebf5d0cd77cea26b41521f
-        sourceBlobDigest: sha256:9464b6777e7db923645e8ba8ea709bb0a62bf66e59f7c4d1c9941993824af6c4
+        sourceRevisionDigest: sha256:617578641131119af4afd601b6bf6864561927f58c903060aba097fdd1ec359d
+        sourceBlobDigest: sha256:7b8d9111019ec44f9530e3ecc65b6b2a5b113d282cba3e78ce4ee4972496b640
         tags:
             - latest
+            - main
 targets:
     pet-store-9424:
         source: PetStore-9.4.24-OAS
         sourceNamespace: pet-store-9-4-24-oas
-        sourceRevisionDigest: sha256:a4c4c95ae4c8b8ee534bca3cfdbcb85babdc2085c3ebf5d0cd77cea26b41521f
-        sourceBlobDigest: sha256:9464b6777e7db923645e8ba8ea709bb0a62bf66e59f7c4d1c9941993824af6c4
-        outLocation: /Users/logangingerich/pet-store-9424-typescript
+        sourceRevisionDigest: sha256:617578641131119af4afd601b6bf6864561927f58c903060aba097fdd1ec359d
+        sourceBlobDigest: sha256:7b8d9111019ec44f9530e3ecc65b6b2a5b113d282cba3e78ce4ee4972496b640
+        codeSamplesNamespace: code-samples-typescript-pet-store-9424
+        codeSamplesRevisionDigest: sha256:8fa29bcec6b4fdb9c2f7bbd2575aafd9d1854d76965126aa6db3ccf79fd2dec9
 workflow:
     workflowVersion: 1.0.0
+    speakeasyVersion: latest
     sources:
         PetStore-9.4.24-OAS:
             inputs:
@@ -25,3 +28,10 @@ workflow:
         pet-store-9424:
             target: typescript
             source: PetStore-9.4.24-OAS
+            publish:
+                npm:
+                    token: $npm_token
+            codeSamples:
+                output: codeSamples.yaml
+                registry:
+                    location: registry.speakeasyapi.dev/loganinc/loganinc/code-samples-typescript-pet-store-9424

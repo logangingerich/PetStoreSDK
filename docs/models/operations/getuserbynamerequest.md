@@ -6,7 +6,7 @@
 import { GetUserByNameRequest } from "pet-store-9424/models/operations";
 
 let value: GetUserByNameRequest = {
-    username: "Glen.Walsh33",
+  username: "Glen.Walsh33",
 };
 ```
 

@@ -10,9 +10,9 @@ Find out more
 
 ### Available Operations
 
-* [updatePetForm](#updatepetform) - Update an existing pet
 * [updatePetJson](#updatepetjson) - Update an existing pet
 * [updatePetRaw](#updatepetraw) - Update an existing pet
+* [updatePetForm](#updatepetform) - Update an existing pet
 * [addPetJson](#addpetjson) - Add a new pet to the store
 * [addPetRaw](#addpetraw) - Add a new pet to the store
 * [addPetForm](#addpetform) - Add a new pet to the store
@@ -23,80 +23,6 @@ Find out more
 * [deletePet](#deletepet) - Deletes a pet
 * [uploadFile](#uploadfile) - uploads an image
 
-## updatePetForm
-
-Update an existing pet by Id
-
-### Example Usage
-
-```typescript
-import { files, PetStore9424 } from "pet-store-9424";
-
-const petStore9424 = new PetStore9424({
-  petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
-});
-
-async function run() {
-  const result = await petStore9424.pet.updatePetForm(files.toStream("example.file"));
-  
-  // Handle the result
-  console.log(result)
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { files } from "pet-store-9424";
-import { PetStore9424Core } from "pet-store-9424/core.js";
-import { petUpdatePetForm } from "pet-store-9424/funcs/petUpdatePetForm.js";
-
-// Use `PetStore9424Core` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const petStore9424 = new PetStore9424Core({
-  petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
-});
-
-async function run() {
-  const res = await petUpdatePetForm(petStore9424, files.toStream("example.file"));
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result)
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [ReadableStream<Uint8Array>](../../models/components/pet1.md)                                                                                                                  | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.UpdatePetFormResponse](../../models/operations/updatepetformresponse.md)\>**
-
-### Errors
-
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4xx-5xx         | */*             |
-
-
 ## updatePetJson
 
 Update an existing pet by Id
@@ -104,14 +30,15 @@ Update an existing pet by Id
 ### Example Usage
 
 ```typescript
-import { files, PetStore9424 } from "pet-store-9424";
+import { openAsBlob } from "node:fs";
+import { PetStore9424 } from "pet-store-9424";
 
 const petStore9424 = new PetStore9424({
   petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await petStore9424.pet.updatePetJson(files.toStream("example.file"));
+  const result = await petStore9424.pet.updatePetJson(await openAsBlob("example.file"));
   
   // Handle the result
   console.log(result)
@@ -125,7 +52,7 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { files } from "pet-store-9424";
+import { openAsBlob } from "node:fs";
 import { PetStore9424Core } from "pet-store-9424/core.js";
 import { petUpdatePetJson } from "pet-store-9424/funcs/petUpdatePetJson.js";
 
@@ -136,7 +63,7 @@ const petStore9424 = new PetStore9424Core({
 });
 
 async function run() {
-  const res = await petUpdatePetJson(petStore9424, files.toStream("example.file"));
+  const res = await petUpdatePetJson(petStore9424, await openAsBlob("example.file"));
 
   if (!res.ok) {
     throw res.error;
@@ -178,14 +105,15 @@ Update an existing pet by Id
 ### Example Usage
 
 ```typescript
-import { files, PetStore9424 } from "pet-store-9424";
+import { openAsBlob } from "node:fs";
+import { PetStore9424 } from "pet-store-9424";
 
 const petStore9424 = new PetStore9424({
   petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await petStore9424.pet.updatePetRaw(files.toStream("example.file"));
+  const result = await petStore9424.pet.updatePetRaw(await openAsBlob("example.file"));
   
   // Handle the result
   console.log(result)
@@ -199,7 +127,7 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { files } from "pet-store-9424";
+import { openAsBlob } from "node:fs";
 import { PetStore9424Core } from "pet-store-9424/core.js";
 import { petUpdatePetRaw } from "pet-store-9424/funcs/petUpdatePetRaw.js";
 
@@ -210,7 +138,7 @@ const petStore9424 = new PetStore9424Core({
 });
 
 async function run() {
-  const res = await petUpdatePetRaw(petStore9424, files.toStream("example.file"));
+  const res = await petUpdatePetRaw(petStore9424, await openAsBlob("example.file"));
 
   if (!res.ok) {
     throw res.error;
@@ -245,21 +173,22 @@ run();
 | errors.SDKError | 4xx-5xx         | */*             |
 
 
-## addPetJson
+## updatePetForm
 
-Add a new pet to the store
+Update an existing pet by Id
 
 ### Example Usage
 
 ```typescript
-import { files, PetStore9424 } from "pet-store-9424";
+import { openAsBlob } from "node:fs";
+import { PetStore9424 } from "pet-store-9424";
 
 const petStore9424 = new PetStore9424({
   petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await petStore9424.pet.addPetJson(files.toStream("example.file"));
+  const result = await petStore9424.pet.updatePetForm(await openAsBlob("example.file"));
   
   // Handle the result
   console.log(result)
@@ -273,7 +202,82 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { files } from "pet-store-9424";
+import { openAsBlob } from "node:fs";
+import { PetStore9424Core } from "pet-store-9424/core.js";
+import { petUpdatePetForm } from "pet-store-9424/funcs/petUpdatePetForm.js";
+
+// Use `PetStore9424Core` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const petStore9424 = new PetStore9424Core({
+  petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await petUpdatePetForm(petStore9424, await openAsBlob("example.file"));
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result)
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [ReadableStream<Uint8Array>](../../models/components/pet1.md)                                                                                                                  | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.UpdatePetFormResponse](../../models/operations/updatepetformresponse.md)\>**
+
+### Errors
+
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |
+
+
+## addPetJson
+
+Add a new pet to the store
+
+### Example Usage
+
+```typescript
+import { openAsBlob } from "node:fs";
+import { PetStore9424 } from "pet-store-9424";
+
+const petStore9424 = new PetStore9424({
+  petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await petStore9424.pet.addPetJson(await openAsBlob("example.file"));
+  
+  // Handle the result
+  console.log(result)
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { openAsBlob } from "node:fs";
 import { PetStore9424Core } from "pet-store-9424/core.js";
 import { petAddPetJson } from "pet-store-9424/funcs/petAddPetJson.js";
 
@@ -284,7 +288,7 @@ const petStore9424 = new PetStore9424Core({
 });
 
 async function run() {
-  const res = await petAddPetJson(petStore9424, files.toStream("example.file"));
+  const res = await petAddPetJson(petStore9424, await openAsBlob("example.file"));
 
   if (!res.ok) {
     throw res.error;
@@ -326,14 +330,15 @@ Add a new pet to the store
 ### Example Usage
 
 ```typescript
-import { files, PetStore9424 } from "pet-store-9424";
+import { openAsBlob } from "node:fs";
+import { PetStore9424 } from "pet-store-9424";
 
 const petStore9424 = new PetStore9424({
   petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await petStore9424.pet.addPetRaw(files.toStream("example.file"));
+  const result = await petStore9424.pet.addPetRaw(await openAsBlob("example.file"));
   
   // Handle the result
   console.log(result)
@@ -347,7 +352,7 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { files } from "pet-store-9424";
+import { openAsBlob } from "node:fs";
 import { PetStore9424Core } from "pet-store-9424/core.js";
 import { petAddPetRaw } from "pet-store-9424/funcs/petAddPetRaw.js";
 
@@ -358,7 +363,7 @@ const petStore9424 = new PetStore9424Core({
 });
 
 async function run() {
-  const res = await petAddPetRaw(petStore9424, files.toStream("example.file"));
+  const res = await petAddPetRaw(petStore9424, await openAsBlob("example.file"));
 
   if (!res.ok) {
     throw res.error;
@@ -671,7 +676,7 @@ const petStore9424 = new PetStore9424Core();
 
 async function run() {
   const res = await petGetPetById(petStore9424, {
-    petId: 30806,
+    petId: 504151,
   }, {
     apiKey: process.env["PETSTORE9424_API_KEY"] ?? "",
   });
@@ -748,7 +753,7 @@ const petStore9424 = new PetStore9424Core({
 
 async function run() {
   const res = await petUpdatePetWithForm(petStore9424, {
-    petId: 976802,
+    petId: 303241,
   });
 
   if (!res.ok) {
@@ -821,7 +826,7 @@ const petStore9424 = new PetStore9424Core({
 
 async function run() {
   const res = await petDeletePet(petStore9424, {
-    petId: 449384,
+    petId: 441876,
   });
 
   if (!res.ok) {
@@ -897,7 +902,7 @@ const petStore9424 = new PetStore9424Core({
 
 async function run() {
   const res = await petUploadFile(petStore9424, {
-    petId: 586600,
+    petId: 565380,
   });
 
   if (!res.ok) {

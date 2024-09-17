@@ -58,25 +58,25 @@ The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https
 ### NPM
 
 ```bash
-npm add <UNSET>
+npm add pet-store-9424
 ```
 
 ### PNPM
 
 ```bash
-pnpm add <UNSET>
+pnpm add pet-store-9424
 ```
 
 ### Bun
 
 ```bash
-bun add <UNSET>
+bun add pet-store-9424
 ```
 
 ### Yarn
 
 ```bash
-yarn add <UNSET> zod
+yarn add pet-store-9424 zod
 
 # Note that Yarn does not install peer dependencies automatically. You will need
 # to install zod as shown above.
@@ -95,17 +95,20 @@ For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 ### Example
 
 ```typescript
-import { files, PetStore9424 } from "pet-store-9424";
+import { openAsBlob } from "node:fs";
+import { PetStore9424 } from "pet-store-9424";
 
 const petStore9424 = new PetStore9424({
-    petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
+  petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
 });
 
 async function run() {
-    const result = await petStore9424.pet.updatePetForm(files.toStream("example.file"));
+  const result = await petStore9424.pet.updatePetJson(
+    await openAsBlob("example.file"),
+  );
 
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -116,11 +119,14 @@ run();
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
 
+<details open>
+<summary>Available methods</summary>
+
 ### [pet](docs/sdks/pet/README.md)
 
-* [updatePetForm](docs/sdks/pet/README.md#updatepetform) - Update an existing pet
 * [updatePetJson](docs/sdks/pet/README.md#updatepetjson) - Update an existing pet
 * [updatePetRaw](docs/sdks/pet/README.md#updatepetraw) - Update an existing pet
+* [updatePetForm](docs/sdks/pet/README.md#updatepetform) - Update an existing pet
 * [addPetJson](docs/sdks/pet/README.md#addpetjson) - Add a new pet to the store
 * [addPetRaw](docs/sdks/pet/README.md#addpetraw) - Add a new pet to the store
 * [addPetForm](docs/sdks/pet/README.md#addpetform) - Add a new pet to the store
@@ -130,6 +136,7 @@ run();
 * [updatePetWithForm](docs/sdks/pet/README.md#updatepetwithform) - Updates a pet in the store with form data
 * [deletePet](docs/sdks/pet/README.md#deletepet) - Deletes a pet
 * [uploadFile](docs/sdks/pet/README.md#uploadfile) - uploads an image
+
 
 ### [store](docs/sdks/store/README.md)
 
@@ -153,6 +160,8 @@ run();
 * [updateUserRaw](docs/sdks/user/README.md#updateuserraw) - Update user
 * [updateUserForm](docs/sdks/user/README.md#updateuserform) - Update user
 * [deleteUser](docs/sdks/user/README.md#deleteuser) - Delete user
+
+</details>
 <!-- End Available Resources and Operations [operations] -->
 
 <!-- Start Standalone functions [standalone-funcs] -->
@@ -219,17 +228,20 @@ Certain SDK methods accept files as part of a multi-part request. It is possible
 > - **Node.js v18:** A file stream can be created using the `fileFrom` helper from [`fetch-blob/from.js`](https://www.npmjs.com/package/fetch-blob).
 
 ```typescript
-import { files, PetStore9424 } from "pet-store-9424";
+import { openAsBlob } from "node:fs";
+import { PetStore9424 } from "pet-store-9424";
 
 const petStore9424 = new PetStore9424({
-    petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
+  petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
 });
 
 async function run() {
-    const result = await petStore9424.pet.updatePetForm(files.toStream("example.file"));
+  const result = await petStore9424.pet.updatePetJson(
+    await openAsBlob("example.file"),
+  );
 
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -244,28 +256,32 @@ Some of the endpoints in this SDK support retries.  If you use the SDK without a
 
 To change the default retry strategy for a single API call, simply provide a retryConfig object to the call:
 ```typescript
-import { files, PetStore9424 } from "pet-store-9424";
+import { openAsBlob } from "node:fs";
+import { PetStore9424 } from "pet-store-9424";
 
 const petStore9424 = new PetStore9424({
-    petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
+  petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
 });
 
 async function run() {
-    const result = await petStore9424.pet.updatePetForm(files.toStream("example.file"), {
-        retries: {
-            strategy: "backoff",
-            backoff: {
-                initialInterval: 1,
-                maxInterval: 50,
-                exponent: 1.1,
-                maxElapsedTime: 100,
-            },
-            retryConnectionErrors: false,
+  const result = await petStore9424.pet.updatePetJson(
+    await openAsBlob("example.file"),
+    {
+      retries: {
+        strategy: "backoff",
+        backoff: {
+          initialInterval: 1,
+          maxInterval: 50,
+          exponent: 1.1,
+          maxElapsedTime: 100,
         },
-    });
+        retryConnectionErrors: false,
+      },
+    },
+  );
 
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -274,27 +290,30 @@ run();
 
 If you'd like to override the default retry strategy for all operations that support retries, you can provide a retryConfig at SDK initialization:
 ```typescript
-import { files, PetStore9424 } from "pet-store-9424";
+import { openAsBlob } from "node:fs";
+import { PetStore9424 } from "pet-store-9424";
 
 const petStore9424 = new PetStore9424({
-    retryConfig: {
-        strategy: "backoff",
-        backoff: {
-            initialInterval: 1,
-            maxInterval: 50,
-            exponent: 1.1,
-            maxElapsedTime: 100,
-        },
-        retryConnectionErrors: false,
+  retryConfig: {
+    strategy: "backoff",
+    backoff: {
+      initialInterval: 1,
+      maxInterval: 50,
+      exponent: 1.1,
+      maxElapsedTime: 100,
     },
-    petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
+    retryConnectionErrors: false,
+  },
+  petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
 });
 
 async function run() {
-    const result = await petStore9424.pet.updatePetForm(files.toStream("example.file"));
+  const result = await petStore9424.pet.updatePetJson(
+    await openAsBlob("example.file"),
+  );
 
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -315,34 +334,37 @@ Validation errors can also occur when either method arguments or data returned f
 
 
 ```typescript
-import { files, PetStore9424 } from "pet-store-9424";
+import { openAsBlob } from "node:fs";
+import { PetStore9424 } from "pet-store-9424";
 import { SDKValidationError } from "pet-store-9424/models/errors";
 
 const petStore9424 = new PetStore9424({
-    petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
+  petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
 });
 
 async function run() {
-    let result;
-    try {
-        result = await petStore9424.pet.updatePetForm(files.toStream("example.file"));
+  let result;
+  try {
+    result = await petStore9424.pet.updatePetJson(
+      await openAsBlob("example.file"),
+    );
 
-        // Handle the result
-        console.log(result);
-    } catch (err) {
-        switch (true) {
-            case err instanceof SDKValidationError: {
-                // Validation errors can be pretty-printed
-                console.error(err.pretty());
-                // Raw value may also be inspected
-                console.error(err.rawValue);
-                return;
-            }
-            default: {
-                throw err;
-            }
-        }
+    // Handle the result
+    console.log(result);
+  } catch (err) {
+    switch (true) {
+      case (err instanceof SDKValidationError): {
+        // Validation errors can be pretty-printed
+        console.error(err.pretty());
+        // Raw value may also be inspected
+        console.error(err.rawValue);
+        return;
+      }
+      default: {
+        throw err;
+      }
     }
+  }
 }
 
 run();
@@ -362,18 +384,21 @@ You can override the default server globally by passing a server index to the `s
 | 0 | `https:///api/v3` | None |
 
 ```typescript
-import { files, PetStore9424 } from "pet-store-9424";
+import { openAsBlob } from "node:fs";
+import { PetStore9424 } from "pet-store-9424";
 
 const petStore9424 = new PetStore9424({
-    serverIdx: 0,
-    petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
+  serverIdx: 0,
+  petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
 });
 
 async function run() {
-    const result = await petStore9424.pet.updatePetForm(files.toStream("example.file"));
+  const result = await petStore9424.pet.updatePetJson(
+    await openAsBlob("example.file"),
+  );
 
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -386,18 +411,21 @@ run();
 The default server can also be overridden globally by passing a URL to the `serverURL` optional parameter when initializing the SDK client instance. For example:
 
 ```typescript
-import { files, PetStore9424 } from "pet-store-9424";
+import { openAsBlob } from "node:fs";
+import { PetStore9424 } from "pet-store-9424";
 
 const petStore9424 = new PetStore9424({
-    serverURL: "https:///api/v3",
-    petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
+  serverURL: "https:///api/v3",
+  petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
 });
 
 async function run() {
-    const result = await petStore9424.pet.updatePetForm(files.toStream("example.file"));
+  const result = await petStore9424.pet.updatePetJson(
+    await openAsBlob("example.file"),
+  );
 
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -467,17 +495,20 @@ This SDK supports the following security scheme globally:
 
 To authenticate with the API the `petstoreAuth` parameter must be set when initializing the SDK client instance. For example:
 ```typescript
-import { files, PetStore9424 } from "pet-store-9424";
+import { openAsBlob } from "node:fs";
+import { PetStore9424 } from "pet-store-9424";
 
 const petStore9424 = new PetStore9424({
-    petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
+  petstoreAuth: process.env["PETSTORE9424_PETSTORE_AUTH"] ?? "",
 });
 
 async function run() {
-    const result = await petStore9424.pet.updatePetForm(files.toStream("example.file"));
+  const result = await petStore9424.pet.updatePetJson(
+    await openAsBlob("example.file"),
+  );
 
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -493,17 +524,14 @@ import { PetStore9424 } from "pet-store-9424";
 const petStore9424 = new PetStore9424();
 
 async function run() {
-    const result = await petStore9424.pet.getPetById(
-        {
-            petId: 504151,
-        },
-        {
-            apiKey: process.env["PETSTORE9424_API_KEY"] ?? "",
-        }
-    );
+  const result = await petStore9424.pet.getPetById({
+    petId: 504151,
+  }, {
+    apiKey: process.env["PETSTORE9424_API_KEY"] ?? "",
+  });
 
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();

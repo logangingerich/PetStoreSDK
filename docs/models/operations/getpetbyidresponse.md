@@ -6,13 +6,15 @@
 import { GetPetByIdResponse } from "pet-store-9424/models/operations";
 
 let value: GetPetByIdResponse = {
-    id: 10,
-    name: "doggie",
-    category: {
-        id: 1,
-        name: "Dogs",
-    },
-    photoUrls: ["<value>"],
+  id: 10,
+  name: "doggie",
+  category: {
+    id: 1,
+    name: "Dogs",
+  },
+  photoUrls: [
+    "<value>",
+  ],
 };
 ```
 
