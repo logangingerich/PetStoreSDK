@@ -6,8 +6,8 @@
 import { Category } from "pet-store-9424/models/components";
 
 let value: Category = {
-    id: 1,
-    name: "Dogs",
+  id: 1,
+  name: "Dogs",
 };
 ```
 

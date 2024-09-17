@@ -6,7 +6,7 @@
 import { GetInventorySecurity } from "pet-store-9424/models/operations";
 
 let value: GetInventorySecurity = {
-    apiKey: "<value>",
+  apiKey: "<value>",
 };
 ```
 

@@ -6,7 +6,7 @@
 import { DeleteOrderRequest } from "pet-store-9424/models/operations";
 
 let value: DeleteOrderRequest = {
-    orderId: 528895,
+  orderId: 528895,
 };
 ```
 

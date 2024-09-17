@@ -6,13 +6,15 @@
 import { AddPetJsonResponse } from "pet-store-9424/models/operations";
 
 let value: AddPetJsonResponse = {
-    id: 10,
-    name: "doggie",
-    category: {
-        id: 1,
-        name: "Dogs",
-    },
-    photoUrls: ["<value>"],
+  id: 10,
+  name: "doggie",
+  category: {
+    id: 1,
+    name: "Dogs",
+  },
+  photoUrls: [
+    "<value>",
+  ],
 };
 ```
 

@@ -19,9 +19,9 @@ specific category of applications.
 ## Example
 
 ```typescript
-import { files } from "pet-store-9424";
+import { openAsBlob } from "node:fs";
 import { PetStore9424Core } from "pet-store-9424/core.js";
-import { petUpdatePetForm } from "pet-store-9424/funcs/petUpdatePetForm.js";
+import { petUpdatePetJson } from "pet-store-9424/funcs/petUpdatePetJson.js";
 import { SDKValidationError } from "pet-store-9424/models/errors/sdkvalidationerror.js";
 
 // Use `PetStore9424Core` for best tree-shaking performance.
@@ -31,7 +31,7 @@ const petStore9424 = new PetStore9424Core({
 });
 
 async function run() {
-  const res = await petUpdatePetForm(petStore9424, files.toStream("example.file"));
+  const res = await petUpdatePetJson(petStore9424, await openAsBlob("example.file"));
 
   switch (true) {
     case res.ok:

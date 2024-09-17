@@ -1,0 +1,149 @@
+overlay: 1.0.0
+info:
+  title: CodeSamples overlay for typescript target
+  version: 0.0.0
+actions:
+  - target: $["paths"]["/pet"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "addPet_json"
+          "source": "import { openAsBlob } from \"node:fs\";\nimport { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await petStore9424.pet.addPetJson(await openAsBlob(\"example.file\"));\n  \n  // Handle the result\n  console.log(result)\n}\n\nrun();"
+        - "lang": "typescript"
+          "label": "addPet_raw"
+          "source": "import { openAsBlob } from \"node:fs\";\nimport { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await petStore9424.pet.addPetRaw(await openAsBlob(\"example.file\"));\n  \n  // Handle the result\n  console.log(result)\n}\n\nrun();"
+        - "lang": "typescript"
+          "label": "addPet_form"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await petStore9424.pet.addPetForm({\n    id: 10,\n    name: \"doggie\",\n    category: {\n      id: 1,\n      name: \"Dogs\",\n    },\n    photoUrls: [\n      \"<value>\",\n    ],\n  });\n  \n  // Handle the result\n  console.log(result)\n}\n\nrun();"
+  - target: $["paths"]["/pet"]["put"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "updatePet_json"
+          "source": "import { openAsBlob } from \"node:fs\";\nimport { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await petStore9424.pet.updatePetJson(await openAsBlob(\"example.file\"));\n  \n  // Handle the result\n  console.log(result)\n}\n\nrun();"
+        - "lang": "typescript"
+          "label": "updatePet_raw"
+          "source": "import { openAsBlob } from \"node:fs\";\nimport { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await petStore9424.pet.updatePetRaw(await openAsBlob(\"example.file\"));\n  \n  // Handle the result\n  console.log(result)\n}\n\nrun();"
+        - "lang": "typescript"
+          "label": "updatePet_form"
+          "source": "import { openAsBlob } from \"node:fs\";\nimport { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await petStore9424.pet.updatePetForm(await openAsBlob(\"example.file\"));\n  \n  // Handle the result\n  console.log(result)\n}\n\nrun();"
+  - target: $["paths"]["/pet/findByStatus"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "findPetsByStatus"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await petStore9424.pet.findPetsByStatus({});\n  \n  // Handle the result\n  console.log(result)\n}\n\nrun();"
+  - target: $["paths"]["/pet/findByTags"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "findPetsByTags"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await petStore9424.pet.findPetsByTags({});\n  \n  // Handle the result\n  console.log(result)\n}\n\nrun();"
+  - target: $["paths"]["/pet/{petId}"]["delete"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "deletePet"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  await petStore9424.pet.deletePet({\n    petId: 441876,\n  });\n}\n\nrun();"
+  - target: $["paths"]["/pet/{petId}"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "getPetById"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424();\n\nasync function run() {\n  const result = await petStore9424.pet.getPetById({\n    petId: 504151,\n  }, {\n    apiKey: process.env[\"PETSTORE9424_API_KEY\"] ?? \"\",\n  });\n  \n  // Handle the result\n  console.log(result)\n}\n\nrun();"
+  - target: $["paths"]["/pet/{petId}"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "updatePetWithForm"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  await petStore9424.pet.updatePetWithForm({\n    petId: 303241,\n  });\n}\n\nrun();"
+  - target: $["paths"]["/pet/{petId}/uploadImage"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "uploadFile"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await petStore9424.pet.uploadFile({\n    petId: 565380,\n  });\n  \n  // Handle the result\n  console.log(result)\n}\n\nrun();"
+  - target: $["paths"]["/store/inventory"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "getInventory"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424();\n\nasync function run() {\n  const result = await petStore9424.store.getInventory({\n    apiKey: process.env[\"PETSTORE9424_API_KEY\"] ?? \"\",\n  });\n  \n  // Handle the result\n  console.log(result)\n}\n\nrun();"
+  - target: $["paths"]["/store/order"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "placeOrder_json"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await petStore9424.store.placeOrderJson();\n  \n  // Handle the result\n  console.log(result)\n}\n\nrun();"
+        - "lang": "typescript"
+          "label": "placeOrder_raw"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await petStore9424.store.placeOrderRaw();\n  \n  // Handle the result\n  console.log(result)\n}\n\nrun();"
+        - "lang": "typescript"
+          "label": "placeOrder_form"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await petStore9424.store.placeOrderForm({\n    id: 10,\n    petId: 198772,\n    quantity: 7,\n    status: \"approved\",\n  });\n  \n  // Handle the result\n  console.log(result)\n}\n\nrun();"
+  - target: $["paths"]["/store/order/{orderId}"]["delete"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "deleteOrder"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  await petStore9424.store.deleteOrder({\n    orderId: 127902,\n  });\n}\n\nrun();"
+  - target: $["paths"]["/store/order/{orderId}"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "getOrderById"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await petStore9424.store.getOrderById({\n    orderId: 614993,\n  });\n  \n  // Handle the result\n  console.log(result)\n}\n\nrun();"
+  - target: $["paths"]["/user"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "createUser_form"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await petStore9424.user.createUserForm();\n  \n  // Handle the result\n  console.log(result)\n}\n\nrun();"
+        - "lang": "typescript"
+          "label": "createUser_json"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await petStore9424.user.createUserJson();\n  \n  // Handle the result\n  console.log(result)\n}\n\nrun();"
+        - "lang": "typescript"
+          "label": "createUser_raw"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await petStore9424.user.createUserRaw();\n  \n  // Handle the result\n  console.log(result)\n}\n\nrun();"
+  - target: $["paths"]["/user/createWithList"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "createUsersWithListInput"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await petStore9424.user.createUsersWithListInput();\n  \n  // Handle the result\n  console.log(result)\n}\n\nrun();"
+  - target: $["paths"]["/user/login"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "loginUser"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await petStore9424.user.loginUser({});\n  \n  // Handle the result\n  console.log(result)\n}\n\nrun();"
+  - target: $["paths"]["/user/logout"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "logoutUser"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  await petStore9424.user.logoutUser();\n}\n\nrun();"
+  - target: $["paths"]["/user/{username}"]["delete"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "deleteUser"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  await petStore9424.user.deleteUser({\n    username: \"Demetris_Torphy\",\n  });\n}\n\nrun();"
+  - target: $["paths"]["/user/{username}"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "getUserByName"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await petStore9424.user.getUserByName({\n    username: \"Zachery_Schneider\",\n  });\n  \n  // Handle the result\n  console.log(result)\n}\n\nrun();"
+  - target: $["paths"]["/user/{username}"]["put"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "updateUser_json"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  await petStore9424.user.updateUserJson({\n    username: \"Alanna_Waters81\",\n  });\n}\n\nrun();"
+        - "lang": "typescript"
+          "label": "updateUser_raw"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  await petStore9424.user.updateUserRaw({\n    username: \"Maximus.DuBuque29\",\n  });\n}\n\nrun();"
+        - "lang": "typescript"
+          "label": "updateUser_form"
+          "source": "import { PetStore9424 } from \"pet-store-9424\";\n\nconst petStore9424 = new PetStore9424({\n  petstoreAuth: process.env[\"PETSTORE9424_PETSTORE_AUTH\"] ?? \"\",\n});\n\nasync function run() {\n  await petStore9424.user.updateUserForm({\n    username: \"Bo_Lynch4\",\n    user: {\n      id: 10,\n      username: \"theUser\",\n      firstName: \"John\",\n      lastName: \"James\",\n      email: \"john@email.com\",\n      password: \"12345\",\n      phone: \"12345\",\n      userStatus: 1,\n    },\n  });\n}\n\nrun();"

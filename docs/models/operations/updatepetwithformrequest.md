@@ -6,7 +6,7 @@
 import { UpdatePetWithFormRequest } from "pet-store-9424/models/operations";
 
 let value: UpdatePetWithFormRequest = {
-    petId: 423655,
+  petId: 423655,
 };
 ```
 

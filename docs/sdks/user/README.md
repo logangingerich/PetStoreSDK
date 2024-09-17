@@ -493,7 +493,7 @@ const petStore9424 = new PetStore9424Core({
 
 async function run() {
   const res = await userGetUserByName(petStore9424, {
-    username: "Carmel75",
+    username: "Zachery_Schneider",
   });
 
   if (!res.ok) {
@@ -567,7 +567,7 @@ const petStore9424 = new PetStore9424Core({
 
 async function run() {
   const res = await userUpdateUserJson(petStore9424, {
-    username: "Narciso.Lubowitz75",
+    username: "Alanna_Waters81",
   });
 
   if (!res.ok) {
@@ -640,7 +640,7 @@ const petStore9424 = new PetStore9424Core({
 
 async function run() {
   const res = await userUpdateUserRaw(petStore9424, {
-    username: "Camilla27",
+    username: "Maximus.DuBuque29",
   });
 
   if (!res.ok) {
@@ -723,7 +723,7 @@ const petStore9424 = new PetStore9424Core({
 
 async function run() {
   const res = await userUpdateUserForm(petStore9424, {
-    username: "Sandra.Upton64",
+    username: "Bo_Lynch4",
     user: {
       id: 10,
       username: "theUser",
@@ -806,7 +806,7 @@ const petStore9424 = new PetStore9424Core({
 
 async function run() {
   const res = await userDeleteUser(petStore9424, {
-    username: "Christina.Marks72",
+    username: "Demetris_Torphy",
   });
 
   if (!res.ok) {

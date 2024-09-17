@@ -6,7 +6,7 @@
 import { GetOrderByIdRequest } from "pet-store-9424/models/operations";
 
 let value: GetOrderByIdRequest = {
-    orderId: 645894,
+  orderId: 645894,
 };
 ```
 

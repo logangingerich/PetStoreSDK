@@ -6,7 +6,7 @@
 import { DeletePetRequest } from "pet-store-9424/models/operations";
 
 let value: DeletePetRequest = {
-    petId: 623564,
+  petId: 623564,
 };
 ```
 

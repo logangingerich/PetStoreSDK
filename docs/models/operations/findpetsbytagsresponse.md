@@ -6,15 +6,17 @@
 import { FindPetsByTagsResponse } from "pet-store-9424/models/operations";
 
 let value: FindPetsByTagsResponse = [
-    {
-        id: 10,
-        name: "doggie",
-        category: {
-            id: 1,
-            name: "Dogs",
-        },
-        photoUrls: ["<value>"],
+  {
+    id: 10,
+    name: "doggie",
+    category: {
+      id: 1,
+      name: "Dogs",
     },
+    photoUrls: [
+      "<value>",
+    ],
+  },
 ];
 ```
 

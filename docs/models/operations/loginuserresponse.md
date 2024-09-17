@@ -6,10 +6,12 @@
 import { LoginUserResponse } from "pet-store-9424/models/operations";
 
 let value: LoginUserResponse = {
-    headers: {
-        key: ["<value>"],
-    },
-    result: "<value>",
+  headers: {
+    "key": [
+      "<value>",
+    ],
+  },
+  result: "<value>",
 };
 ```
 
