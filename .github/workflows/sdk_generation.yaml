@@ -18,6 +18,9 @@ permissions:
             set_version:
                 description: optionally set a specific SDK version
                 type: string
+            target:
+                description: 'optionally: set a specific target to generate, default is all'
+                type: string
     schedule:
         - cron: 0 0 * * *
 jobs:
@@ -29,6 +32,7 @@ jobs:
             push_code_samples_only: ${{ fromJSON(github.event.inputs.push_code_samples_only != '' && github.event.inputs.push_code_samples_only || 'false') }}
             set_version: ${{ github.event.inputs.set_version }}
             speakeasy_version: latest
+            target: ${{ github.event.inputs.target }}
         secrets:
             github_access_token: ${{ secrets.GITHUB_TOKEN }}
             npm_token: ${{ secrets.NPM_TOKEN }}
